@@ -8,18 +8,19 @@
 #define FEUILLE 2
 #define CISEAUX 3
 
-int main(){
-    char nom1[28];
-    char nom2[28];
-    char c[28];
-    char choix[5];
-    int scorea = 0;
-    int scoreb = 0;
-    int i = 0;
-    int a = 0;
-    int b = 0;
+int screen (){
+    printf("---------------------- ShiFuMi ! --------------------\n");
+        printf("1.PIERRE\n");
+        printf("2.FEUILLE\n");
+        printf("3.CISEAUX\n");
+        printf("4.SAUVEGARDE\n");
+        printf("0.Quitter\n");
+        printf("-----------------------------------------------------\n");
+}
 
-    system("clear");
+void name ( char* nom1, char* nom2, char* c ){
+
+
 
     while (1)
     {
@@ -58,83 +59,101 @@ int main(){
         system("clear");
     }
     }
+    }
 
+int main(){
+    char nom1[28];
+    char nom2[28];
+    char c[28];
+    char choix[5];
+    int scorea = 0;
+    int scoreb = 0;
+    int i = 0;
+    int a = 0;
+    int b = 0;
+
+    name(nom1, nom2, c);
     while (1)
     {
+
         srand(time(NULL));
     
-        system("clear");
-        printf("---------------------- ShiFuMi ! --------------------\n");
-        printf("1.PIERRE\n");
-        printf("2.FEUILLE\n");
-        printf("3.CISEAUX\n");
-        printf("4.scores\n");
-        printf("0.Quitter\n");
-        printf("-----------------------------------------------------\n");
+        screen ();
         printf("Entrez votre choix %s :", nom1);
         fgets(choix, sizeof(choix), stdin);
         a = atoi(choix);
 
-        if (a == 1)
+        switch (a)
         {
-            printf("Vous avez choisi PIERRE\n");
-        }
-        else if (a == 2)
-        {
-           printf("Vous avez choisi FEUILLE\n");
-        }
-        else if (a == 3)
-        {
-            printf("Vous avez choisi CISEAUX\n");
-        }
-        else if (a == 0)
-        {
-            printf("Merci d'avoir joue !\n");
+            case 1:
+                printf("Vous avez choisi PIERRE\n");
+                break;
+            case 2:
+                printf("Vous avez choisi FEUILLE\n");
+                break;
+            case 3:
+                printf("Vous avez choisi CISEAUX\n");
+                break;
+            case 4:
+                printf("Sauvegarde\n");
+                FILE* file = fopen("BDD.txt", "r+"); // Ouvre un fichier en écriture et lecture 
+                fscanf(file,"%s %d", nom1, &scorea);
+                fscanf(file,"%s %d", nom2, &scoreb);
+                fclose(file);
+                continue;
+            case 0:
+                printf("Merci d'avoir joue !\n");
 
-            printf("%s : Reussite(s) : %d\n", nom1, scorea);
-            printf("%s : Reussite(s) : %d\n", nom2, scoreb);
-            printf("Entrer pour quitter\n");
+                printf("%s : Reussite(s) : %d\n", nom1, scorea);
+                printf("%s : Reussite(s) : %d\n", nom2, scoreb);
+                printf("Entrer pour quitter\n");
 
-            getchar();
+                getchar();
 
-            system("clear");
-            break;
+                system("clear");
+                return 0;
+                break;
+            default:
+                printf("choix invalide, reessayez\n");
+                break;
         }
         
 
         system("clear");
-        printf("---------------------- ShiFuMi ! --------------------\n");
-        printf("1.PIERRE\n");
-        printf("2.FEUILLE\n");
-        printf("3.CISEAUX\n");
-        printf("0.Quitter\n");
-        printf("-----------------------------------------------------\n");
+        screen ();
         printf("Entrez votre choix %s :", nom2);
         fgets(choix, sizeof(choix), stdin);
         b = atoi(choix);
 
 
+        switch (b)
+        {
+            case 1:
+                printf("Vous avez choisi PIERRE\n");
+                break;
+            case 2:
+                printf("Vous avez choisi FEUILLE\n");
+                break;
+            case 3:
+                printf("Vous avez choisi CISEAUX\n");
+                break;
+            case 0:
+                printf("Merci d'avoir joue !\n");
 
-        if (b == 1)
-        {
-            printf("Vous avez choisi PIERRE\n");
-        }
-        else if (b == 2)
-        {
-           printf("Vous avez choisi FEUILLE\n");
-        }
-        else if (b == 3)
-        {
-            printf("Vous avez choisi CISEAUX\n");
-        }
-        else if (b == 0)
-        {
-            system("clear");
-            return 0;
+                printf("%s : Reussite(s) : %d\n", nom1, scorea);
+                printf("%s : Reussite(s) : %d\n", nom2, scoreb);
+                printf("Entrer pour quitter\n");
+
+                getchar();
+
+                system("clear");
+                return 0;
+            default:
+                printf("choix invalide, reessayez\n");
+                break;
         }
 
         system("clear");
-
         printf("3\n");
         sleep(1);
         printf("2\n");
@@ -143,117 +162,70 @@ int main(){
         sleep(1);
 
 
-        if (a == b)
-        {
-            printf("Egalite\n");
-            sleep(5);
-        }
-        else if (a == PIERRE && b == FEUILLE)
-        {
-            printf("FEUILLE bat PIERRE\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-         else if (b == PIERRE && a == FEUILLE)
-        {
-            printf("FEUILLE bat PIERRE\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-        else if (a == PIERRE && b == CISEAUX)
-        {
-            printf("PIERRE bat CISEAUX\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-         else if (b == PIERRE && a == CISEAUX)
-        {
-            printf("PIERRE bat CISEAUX\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-        else if (a == FEUILLE && b == PIERRE)
-        {
-            printf("PIERRE bat FEUILLE\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-         else if (b == FEUILLE && a == PIERRE)
-        {
-            printf("PIERRE bat FEUILLE\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-        else if (a == FEUILLE && b == CISEAUX)
-        {
-            printf("FEUILLE bat CISEAUX\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(4);
-        }
-         else if (b == FEUILLE && a == CISEAUX)
-        {
-            printf("FEUILLE bat CISEAUX\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(4);
-        }
-        else if (a == CISEAUX && b == PIERRE)
-        {
-            printf("PIERRE bat CISEAUX\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-         else if (b == CISEAUX && a == PIERRE)
-        {
-            printf("PIERRE bat CISEAUX\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-        else if (a == CISEAUX && b == FEUILLE)
-        {
-            printf("FEUILLE bat PIERRE\n");
-            scorea++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
-        }
-        else if (b == CISEAUX && a == FEUILLE)
-        {
-            printf("FEUILLE bat PIERRE\n");
-            scoreb++;
-            printf("%s : %d\n", nom1, scorea);
-            printf("%s : %d\n", nom2, scoreb);
-            sleep(5);
+        switch (a) {
+            case PIERRE:
+                switch (b) {
+                    case FEUILLE:
+                        printf("FEUILLE bat PIERRE\n");
+                        scoreb++;
+                        break;
+                    case CISEAUX:
+                        printf("PIERRE bat CISEAUX\n");
+                        scorea++;
+                        break;
+                    default:
+                        printf("Egalite\n");
+                        break;
+                }
+                break;
+            case FEUILLE:
+                switch (b) {
+                    case PIERRE:
+                        printf("PIERRE bat FEUILLE\n");
+                        scorea++;
+                        break;
+                    case CISEAUX:
+                        printf("FEUILLE bat CISEAUX\n");
+                        scoreb++;
+                        break;
+                    default:
+                        printf("Egalite\n");
+                        break;
+                }
+                break;
+            case CISEAUX:
+                switch (b) {
+                    case PIERRE:
+                        printf("PIERRE bat CISEAUX\n");
+                        scoreb++;
+                        break;
+                    case FEUILLE:
+                        printf("FEUILLE bat PIERRE\n");
+                        scorea++;
+                        break;
+                    default:
+                        printf("Egalite\n");
+                        break;
+                }
+                break;
+            default:
+                printf("Erreur\n");
+                break;
         }
 
-        }
+        printf("%s : %d\n", nom1, scorea);
+        printf("%s : %d\n", nom2, scoreb);
 
-    // 1. Ouvrir le fichier avec fopen()
-    FILE* file = fopen("BDD.txt", "w+"); // Ouvre un fichier en écriture et lecture
-    
-    if (file != NULL) {
+        printf("Entrer pour continuer\n");
+        getchar();
+
+        // 1. Ouvrir le fichier avec fopen()
+        FILE* file = fopen("BDD.txt", "w+"); // Ouvre un fichier en écriture et lecture
+        
+        if (file != NULL) {
         // 2. Lire le fichier avec fprintf()
         fprintf(file, "%s %d\n",nom1, scorea);
-        fprintf(file, "%s %d",nom2, scoreb);
+        fprintf(file, "%s %d\n",nom2, scoreb);
 
         char buf[255];
         memset(buf,0,255);
@@ -263,31 +235,11 @@ int main(){
 
         // 4. Utiliser fread() pour lire le fichier
         fread(buf,1,255,file);
-
-        // J'affiche le buf remplit par fread()
-        printf(file, "%s %d\n",nom1, scorea);
-        printf(file, "%s %d",nom2, scoreb);
         
         fclose(file); // 5. Ferme le fichier
 
-
-
-        // FILE *fptr = fopen("save.txt", "r");
-        // if(fptr == NULL) {
-        //     printf("Error opening file\n");
-        //     return;
-        // }
-        // fscanf(fptr, "Player1 :%[^\n]\n", nom1);
-        // fscanf(fptr, "Score1 :%d\n", scorea);
-        // fscanf(fptr, "Player2 :%[^\n]\n", nom2);
-        // fscanf(fptr, "Score2 :%d\n", scoreb);
-        // fclose(fptr); // close the file
-
     }
-    return 0;
 }
+    return 0;
 
-
-
-
-
+}
