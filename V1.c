@@ -72,12 +72,14 @@ int main(){
     int a = 0;
     int b = 0;
 
+    system("clear");
     name(nom1, nom2, c);
     while (1)
     {
 
         srand(time(NULL));
     
+        system("clear");
         screen ();
         printf("Entrez votre choix %s :", nom1);
         fgets(choix, sizeof(choix), stdin);
@@ -87,12 +89,15 @@ int main(){
         {
             case 1:
                 printf("Vous avez choisi PIERRE\n");
+                sleep(1);
                 break;
             case 2:
                 printf("Vous avez choisi FEUILLE\n");
+                sleep(1);
                 break;
             case 3:
                 printf("Vous avez choisi CISEAUX\n");
+                sleep(1);
                 break;
             case 4:
                 printf("Sauvegarde\n");
@@ -104,6 +109,7 @@ int main(){
             case 0:
                 printf("Merci d'avoir joue !\n");
 
+                printf("---------------------- GAME OVER ! --------------------\n");
                 printf("%s : Reussite(s) : %d\n", nom1, scorea);
                 printf("%s : Reussite(s) : %d\n", nom2, scoreb);
                 printf("Entrer pour quitter\n");
@@ -130,12 +136,15 @@ int main(){
         {
             case 1:
                 printf("Vous avez choisi PIERRE\n");
+                sleep(1);
                 break;
             case 2:
                 printf("Vous avez choisi FEUILLE\n");
+                sleep(1);
                 break;
             case 3:
                 printf("Vous avez choisi CISEAUX\n");
+                sleep(1);
                 break;
             case 0:
                 printf("Merci d'avoir joue !\n");
@@ -158,7 +167,7 @@ int main(){
         sleep(1);
         printf("2\n");
         sleep(1);
-        printf("1\n");
+        printf("1\n\n");
         sleep(1);
 
 
